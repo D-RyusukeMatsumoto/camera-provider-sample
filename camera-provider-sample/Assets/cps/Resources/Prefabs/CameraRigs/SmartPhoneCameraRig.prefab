@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7513689214699613836}
   - component: {fileID: 941325281643187167}
   m_Layer: 0
-  m_Name: AndroidCameraRig
+  m_Name: SmartPhoneCameraRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

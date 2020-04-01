@@ -11,12 +11,9 @@ namespace CameraSystem
     public class CameraProvider : SingletonMonoBehaviour<CameraProvider>
     {
 
-
-
         public enum DeviceId
         {
-            Android,
-            iOS,
+            SmartPhone,
             OculusGo,
             Pico,
         }
@@ -24,13 +21,12 @@ namespace CameraSystem
         [Header("今はとりあえずここに列挙してる")] 
         [SerializeField] DeviceId device;
 
-        [SerializeField] GameObject androidCameraRig;
-        [SerializeField] GameObject iOSCameraRig;
+        [SerializeField] GameObject smartPhoneCameraRig;
         [SerializeField] GameObject oculusGoCameraRigPf;
         [SerializeField] GameObject picoCameraRigPf;
         [Header("-----------------------------")]        
         
-        CameraRig rig;
+        ICameraRig rig;
         
         
         protected override void Awake()
@@ -47,6 +43,7 @@ namespace CameraSystem
         static void SceneUnLoadedListener(
             Scene scene )
         {
+            Instance.rig = null;
         }
 
 
@@ -63,15 +60,14 @@ namespace CameraSystem
             Scene scene,
             LoadSceneMode mode )
         {
+            // 既にCameraRigが存在する場合は生成しない.
+            if (Instance.rig != null) return;
+
             GameObject cameraRigObj = null;
             switch (Instance.device)
             {
-                case DeviceId.Android:
-                    cameraRigObj = Instantiate(Instance.androidCameraRig);
-                    break;
-                
-                case DeviceId.iOS:
-                    cameraRigObj = Instantiate(Instance.iOSCameraRig);
+                case DeviceId.SmartPhone:
+                    cameraRigObj = Instantiate(Instance.smartPhoneCameraRig);
                     break;
                 
                 case DeviceId.OculusGo:
@@ -86,11 +82,15 @@ namespace CameraSystem
             if (cameraRigObj != null)
             {
                 CameraProvider.RemoveCloneString(cameraRigObj);
-                Instance.rig = cameraRigObj.GetComponent<CameraRig>();
+                Instance.rig = cameraRigObj.GetComponent<ICameraRig>();
             }
         }
 
 
+        /// <summary>
+        /// GameObject生成時の(Clone)文字列を削除.
+        /// </summary>
+        /// <param name="obj"></param>
         static void RemoveCloneString(GameObject obj) => obj.name = obj.name.Replace("(Clone)", "");
 
 
@@ -98,21 +98,8 @@ namespace CameraSystem
         /// CameraRigの取得.
         /// </summary>
         /// <returns></returns>
-        public static CameraRig GetCameraRig() => Instance.rig;
-
-
-        /// <summary>
-        /// メインカメラの取得.
-        /// </summary>
-        /// <returns></returns>
-        public static GameObject GetMainCamera() => null;
-
-
-        /// <summary>
-        /// コントローラの取得.
-        /// </summary>
-        /// <returns></returns>
-        public static GameObject GetController() => null;
-
+        public static ICameraRig GetCameraRig() => Instance.rig;
+        
+        
     }
 }
