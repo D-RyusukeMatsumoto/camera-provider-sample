@@ -9,7 +9,7 @@ namespace Common
         static void InitializeApp()
         {
             // ここでGameMangerを生成する.
-            var go = GameObject.Instantiate(Resources.Load("Prefabs/GameManager")) as GameObject;
+            var go = GameObject.Instantiate(Resources.Load("Prefabs/CameraProvider")) as GameObject;
             go.name = go.name.Replace("(Clone)", "");
         }
     }
