@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7718c8671f256ab46a7d01e679a6f787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  device: 1
+  device: 2
   smartPhoneCameraRig: {fileID: 5851847575615191942, guid: 7b997c8973652be4880b4c5c8f4453a2,
     type: 3}
   oculusGoCameraRigPf: {fileID: 6748044949273149676, guid: c9b3aa139aa73a742b16bb49c45860b7,

@@ -63,6 +63,7 @@ namespace CameraSystem
             // 既にCameraRigが存在する場合は生成しない.
             if (Instance.rig != null) return;
 
+            // TODO : ここでさらにシーンによって分岐するかもしれない.
             GameObject cameraRigObj = null;
             switch (Instance.device)
             {
