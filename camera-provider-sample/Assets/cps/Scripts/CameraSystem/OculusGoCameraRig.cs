@@ -4,6 +4,9 @@ namespace CameraSystem
 {
     public class OculusGoCameraRig : MonoBehaviour, ICameraRig
     {
+
+        [SerializeField] Transform centerCamera;
+        
         
         /// <summary>
         /// カメラのリセンタ.
@@ -13,7 +16,14 @@ namespace CameraSystem
             Debug.Log("OculusGoCameraRig : Recenterしたよ");
         }
 
-        public Transform GetMainCamera() => transform;
+        
+        public Transform GetMainCamera() => centerCamera;
+
+
+        public Quaternion GetMainCameraRotation() => centerCamera.rotation;
+
+
+        public void SetMainCameraRotation(Quaternion rot) => centerCamera.SetPositionAndRotation(centerCamera.position, rot);
 
 
         public bool GetDownClick() => true;

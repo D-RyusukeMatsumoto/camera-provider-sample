@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -19,6 +20,12 @@ namespace CameraSystem
 
 
         public Transform GetMainCamera() => transform;
+
+
+        public Quaternion GetMainCameraRotation() => transform.rotation;
+
+        
+        public void SetMainCameraRotation(Quaternion rot) => transform.SetPositionAndRotation(transform.position, rot);
 
 
         public bool GetDownClick() => true;
