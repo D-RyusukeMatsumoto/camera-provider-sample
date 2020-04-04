@@ -21,6 +21,8 @@ public class Sample : MonoBehaviour
         {
             rig?.Recenter();            
         }
+        
+        Debug.Log($"Camera Rotation : {rig?.GetMainCameraRotation()}");
     }
     
 }

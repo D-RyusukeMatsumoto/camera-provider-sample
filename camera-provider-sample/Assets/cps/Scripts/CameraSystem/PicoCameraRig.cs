@@ -4,7 +4,11 @@ namespace CameraSystem
 {
     public class PicoCameraRig : MonoBehaviour, ICameraRig
     {
+
+        [SerializeField] Transform bothCamera;
+        [SerializeField] Transform headAnchor;
                 
+        
         /// <summary>
         /// カメラのリセンタ.
         /// </summary>
@@ -13,9 +17,16 @@ namespace CameraSystem
             Debug.Log("PicoCameraRig : Recenterしたよ");
         }
 
-        public Transform GetMainCamera() => transform;
+
+        public Transform GetMainCamera() => bothCamera;
+
+        
+        public Quaternion GetMainCameraRotation() => headAnchor.rotation;
 
 
+        public void SetMainCameraRotation(Quaternion rot) => headAnchor.SetPositionAndRotation(headAnchor.position, rot);
+        
+        
         public bool GetDownClick() => true;
 
     }

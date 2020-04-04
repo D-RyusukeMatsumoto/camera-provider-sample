@@ -18,6 +18,8 @@ namespace CameraSystem
     public interface ICameraTransform
     {
         Transform GetMainCamera();
+        Quaternion GetMainCameraRotation();
+        void SetMainCameraRotation(Quaternion rot);
         void Recenter();
     }
 
