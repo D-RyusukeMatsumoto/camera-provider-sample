@@ -9,6 +9,17 @@ namespace CameraSystem
     /// </summary>
     public class SmartPhoneCameraRig : MonoBehaviour, ICameraRig
     {
+        public event EventHandler<ControllerInputArgs> InputChange;
+
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                InputChange?.Invoke(this, new ControllerInputArgs(ControllerInputId.OnButton1Down));
+            }
+        }
+        
 
         /// <summary>
         /// カメラのリセンタ.
@@ -28,6 +39,9 @@ namespace CameraSystem
         public void SetMainCameraRotation(Quaternion rot) => transform.SetPositionAndRotation(transform.position, rot);
 
 
-        public bool GetDownClick() => true;
+        public bool GetDownClick()
+        {
+            return false;
+        }
     }
 }

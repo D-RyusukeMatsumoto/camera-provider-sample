@@ -1,12 +1,22 @@
+using System;
 using UnityEngine;
 
 namespace CameraSystem
 {
     public class OculusGoCameraRig : MonoBehaviour, ICameraRig
     {
+        public event EventHandler<ControllerInputArgs> InputChange;
 
         [SerializeField] Transform centerCamera;
-        
+
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                InputChange?.Invoke(this, new ControllerInputArgs(ControllerInputId.OnButton3Down));
+            }
+        }
         
         /// <summary>
         /// カメラのリセンタ.
@@ -26,7 +36,10 @@ namespace CameraSystem
         public void SetMainCameraRotation(Quaternion rot) => centerCamera.SetPositionAndRotation(centerCamera.position, rot);
 
 
-        public bool GetDownClick() => true;
+        public bool GetDownClick()
+        {
+            return false;
+        }
         
     }
 }

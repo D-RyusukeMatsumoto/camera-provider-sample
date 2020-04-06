@@ -1,14 +1,26 @@
+using System;
 using UnityEngine;
+
 
 namespace CameraSystem
 {
     public class PicoCameraRig : MonoBehaviour, ICameraRig
     {
-
+        public event EventHandler<ControllerInputArgs> InputChange;
+        
         [SerializeField] Transform bothCamera;
         [SerializeField] Transform headAnchor;
-                
-        
+
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                InputChange?.Invoke(this, new ControllerInputArgs(ControllerInputId.OnButton2Down));
+            }
+        }
+
+
         /// <summary>
         /// カメラのリセンタ.
         /// </summary>
@@ -27,7 +39,10 @@ namespace CameraSystem
         public void SetMainCameraRotation(Quaternion rot) => headAnchor.SetPositionAndRotation(headAnchor.position, rot);
         
         
-        public bool GetDownClick() => true;
+        public bool GetDownClick()
+        {
+            return false;
+        }
 
     }
 }
